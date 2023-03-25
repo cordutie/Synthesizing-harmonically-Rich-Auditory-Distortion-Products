@@ -10,6 +10,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=egutierreo@uc.cl
 # Solicitud de cpus
+#SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 
