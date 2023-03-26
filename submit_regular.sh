@@ -2,6 +2,7 @@
 
 # Nombre del trabajo
 #SBATCH --job-name=regular-ghostly-sounds
+#SBATCH --output=salida.txt
 # Cola de trabajo
 #SBATCH --partition=full
 # Reporte por correo
