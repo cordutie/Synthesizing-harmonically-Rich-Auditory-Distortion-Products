@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # Nombre del trabajo
-#SBATCH --job-name=Neural-Sweet
-# Archivo de salida
-#SBATCH --output=salida.txt
+#SBATCH --job-name=regular-ghostly-sounds
 # Cola de trabajo
 #SBATCH --partition=full
 # Reporte por correo
@@ -14,4 +12,4 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 
-python main.py
+python main_regular_version.py
