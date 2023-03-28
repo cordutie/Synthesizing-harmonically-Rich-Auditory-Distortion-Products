@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nombre del trabajo
-#SBATCH --job-name=multiprocessing-ghostly-sounds
+#SBATCH --job-name=regular-ghostly-sounds
 #SBATCH --output=salida.txt
 # Cola de trabajo
 #SBATCH --partition=full
@@ -13,4 +13,4 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 
-python main_multiprocessing_version.py
+python main_regular_tester_buch_simpler_system.py

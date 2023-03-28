@@ -13,4 +13,4 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 
-python main_regular_version.py
+python main_regular_tester_F5_simpler_system.py
