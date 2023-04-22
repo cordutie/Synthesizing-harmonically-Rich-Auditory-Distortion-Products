@@ -73,14 +73,13 @@ def DF(X):
 def newton(X,T,error,tolerance):
     #succes=1 means we won
     #exit=1 means it is time to leave
-    exit=0
     iteration=0
     while np.dot(F(X,T),F(X,T))>error and iteration<tolerance:
         iteration+=1
         X=np.linalg.solve(DF(X),np.matmul(DF(X),X) - F(X,T))
     if np.dot(F(X,T),F(X,T))<error:
         succes=1
-    elif iteration==tolerance:
+    else:
         succes=0
     return [succes,X,iteration]
 

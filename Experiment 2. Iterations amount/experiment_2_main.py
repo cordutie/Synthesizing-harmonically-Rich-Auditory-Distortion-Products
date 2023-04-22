@@ -1,95 +1,50 @@
+import numpy as np
+from Preamble.results_building import *
 from Preamble.functions import *
 
-#Create a list of m targets of n entries
-m=1000
-n=16
-targets=[]
-for i in range(m):
-    targets.append(np.random.rand(n))
+def sampler(n,m):
+    # Create a list of m targets of n entries
+    targets = []
+    for i in range(m):
+        targets.append(np.random.rand(n))
+    return targets
 
-#Try to solve every target up to l times and save the targets that could be solved in less than 10 tries with 100 iterations each
-l=10
-good_targets=[]
-for i in range(len(targets)):
-    j=0
-    succes=0
-    while succes==0 and j<l:
-        j+=1
-        temp_sol=newton(np.random.rand(n),targets[i],0.0001,100)
-        succes=temp_sol[0]
-    if succes==1:
-        good_targets.append(targets[i])
+def experiment_tolerance(samples,tolerance):
+    # Now we solve the problem for each good target counting their iterations using the tolerance given
+    size = len(samples)
+    n=samples[0].size
+    results = np.empty(size)
+    results_contador = np.empty(size)
+    bad_indexes = []
+    for i in range(len(samples)):
+        success = 0
+        contador = 0
+        iterations = 0
+        while success == 0 and contador < 10:
+            contador+=1
+            temp_sol = newton(np.random.rand(n), samples[i], 0.0001, tolerance)
+            success = temp_sol[0]
+            iterations = temp_sol[2]
+        if success==1:
+            results[i] = iterations
+            results_contador[i]=contador
+        else:
+            bad_indexes.append(i)
+    final_results=np.delete(results,bad_indexes)
+    final_results_contador=np.delete(results_contador,bad_indexes)
+    good_targets_size=final_results.size
+    resultados=[n,good_targets_size,np.mean(final_results), np.std(final_results), np.percentile(final_results, 50), np.percentile(final_results, 90), np.percentile(final_results, 99),np.mean(final_results_contador), np.std(final_results_contador), np.percentile(final_results_contador, 50), np.percentile(final_results_contador, 90), np.percentile(final_results_contador, 99),]
+    return resultados
 
-print(str(len(good_targets))+" good targets were found.")
+M=100000
 
-#Now we solve the problem for each good target coounting their iterations using tolerance = 20
-size=len(good_targets)
-results=np.empty(size)
-for i in range(len(good_targets)):
-    succes=0
-    iterations=0
-    while succes==0:
-        temp_sol=newton(np.random.rand(n),good_targets[i],0.0001,20)
-        succes=temp_sol[0]
-        iterations+= temp_sol[2]
-    results[i]=iterations
+results=[]
+results.append(["number of equations","size of the good targets found","mean of iterations","standard deviation of iterations","percentile 50 of iterations","percentile 90 of iterations","percentile 99 of iterations","mean of contador","standard deviation of contador","percentile 50 of contador","percentile 90 of contador","percentile 99 of contador" ])
+samples = sampler(8,M)
+results.append(experiment_tolerance(samples,100))
+samples = sampler(12,M)
+results.append(experiment_tolerance(samples,100))
+samples = sampler(16,M)
+results.append(experiment_tolerance(samples,100))
 
-print("Using tolerance = 20:")
-print("mean          = "+str(np.mean(results)))
-print("percentile 90 = "+str(np.percentile(results,90)))
-print("percentile 99 = "+str(np.percentile(results,99)))
-
-
-#Now we solve the problem for each good target coounting their iterations using tolerance = 30
-size=len(good_targets)
-results=np.empty(size)
-for i in range(len(good_targets)):
-    succes=0
-    iterations=0
-    while succes==0:
-        temp_sol=newton(np.random.rand(n),good_targets[i],0.0001,30)
-        succes=temp_sol[0]
-        iterations+= temp_sol[2]
-    results[i]=iterations
-
-print("Using tolerance = 30:")
-print("mean          = "+str(np.mean(results)))
-print("percentile 90 = "+str(np.percentile(results,90)))
-print("percentile 99 = "+str(np.percentile(results,99)))
-
-
-#Now we solve the problem for each good target coounting their iterations using tolerance = 40
-size=len(good_targets)
-results=np.empty(size)
-for i in range(len(good_targets)):
-    succes=0
-    iterations=0
-    while succes==0:
-        temp_sol=newton(np.random.rand(n),good_targets[i],0.0001,40)
-        succes=temp_sol[0]
-        iterations+= temp_sol[2]
-    results[i]=iterations
-
-print("Using tolerance = 40:")
-print("mean          = "+str(np.mean(results)))
-print("percentile 90 = "+str(np.percentile(results,90)))
-print("percentile 99 = "+str(np.percentile(results,99)))
-
-
-#Now we solve the problem for each good target coounting their iterations using tolerance = 50
-size=len(good_targets)
-results=np.empty(size)
-for i in range(len(good_targets)):
-    succes=0
-    iterations=0
-    while succes==0:
-        temp_sol=newton(np.random.rand(n),good_targets[i],0.0001,50)
-        succes=temp_sol[0]
-        iterations+= temp_sol[2]
-    results[i]=iterations
-
-print("Using tolerance = 50:")
-print("mean          = "+str(np.mean(results)))
-print("percentile 90 = "+str(np.percentile(results,90)))
-print("percentile 99 = "+str(np.percentile(results,99)))
-
+results_to_excel(results,"results.xlsx")

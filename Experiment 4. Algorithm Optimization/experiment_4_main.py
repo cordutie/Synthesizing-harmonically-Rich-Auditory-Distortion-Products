@@ -11,6 +11,7 @@ import copy
 def Experiment(technique,T):
     #amount of variables
     m=T.size
+    epsilon=np.divide(0.01,np.sqrt(m))
     initial_T=copy.copy(T)
 
     #About initial condition:
@@ -39,7 +40,7 @@ def Experiment(technique,T):
                 X=X
             # At fail: About the target
             if technique[2]==0:
-                T=initial_T+0.01*np.random.rand(m)
+                T=initial_T+epsilon*np.random.rand(m)
             elif technique[2]==1:
                 T=T+0.01*np.random.rand(m)
 
