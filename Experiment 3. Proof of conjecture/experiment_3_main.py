@@ -25,7 +25,7 @@ def bad_samples(targets,tolerance):
 
 def experiment_conjecture(bad_targets,tolerance):
     #If no solution could be found, try with T + a small random vector until it can find a solution (maximum repeat=k) and save the number of iterations needed to solve this
-    #(k*30 will then mean that it could not be solved)
+    #(k*tolerance will then mean that it could not be solved)
     k=1000
     results=[]
     n=bad_targets[0].size
@@ -41,19 +41,19 @@ def experiment_conjecture(bad_targets,tolerance):
             results.append(bad_targets[i])
     return results
 
-samples=sampler(8,10000)
+samples=sampler(8,100000)
 bad_targets=bad_samples(samples,72)
 results=experiment_conjecture(bad_targets,72)
 if len(results) != 0:
     results_to_excel(results, "results_8eq.xlsx")
 
-samples=sampler(12,10000)
+samples=sampler(12,100000)
 bad_targets=bad_samples(samples,80)
 results=experiment_conjecture(bad_targets,80)
 if len(results) != 0:
     results_to_excel(results, "results_12eq.xlsx")
 
-samples=sampler(16,10000)
+samples=sampler(16,100000)
 bad_targets=bad_samples(samples,88)
 results=experiment_conjecture(bad_targets,88)
 if len(results) != 0:
