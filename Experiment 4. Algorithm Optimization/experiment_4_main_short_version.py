@@ -57,7 +57,7 @@ technique=[[0,0,0],[0,0,1],[0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]]
 #Number of equations
 n=8
 #number of samples for the experiment
-m=100000
+m=10000
 
 results=[["Technique","Iterations mean","Iterations Standard Deviance","Iterations Percentile 50","Iterations Percentile 90","Iterations Percentile 99","Errors mean","Errors Standard Deviance","Errors Percentile 50","Errors Percentile 90","Errors Percentile 99"]]
 for i in range(len(technique)):
@@ -73,14 +73,14 @@ for i in range(len(technique)):
     print("Technique "+str(technique[i])+" just finished :)")
 
 #Exporting results to a .xlsx file
-results_to_excel(results,"results_8_eq.xlsx")
+results_to_excel(results,"results_8_eq_sv.xlsx")
 
 # --------------------------------------
 
 #Number of equations
 n=12
 #number of samples for the experiment
-m=100000
+m=10000
 
 results=[["Technique","Iterations mean","Iterations Standard Deviance","Iterations Percentile 50","Iterations Percentile 90","Iterations Percentile 99","Errors mean","Errors Standard Deviance","Errors Percentile 50","Errors Percentile 90","Errors Percentile 99"]]
 for i in range(len(technique)):
@@ -96,14 +96,14 @@ for i in range(len(technique)):
     print("Technique "+str(technique[i])+" just finished :)")
 
 #Exporting results to a .xlsx file
-results_to_excel(results,"results_12_eq.xlsx")
+results_to_excel(results,"results_12_eq_sv.xlsx")
 
 #--------------------------------------
 
 #Number of equations
 n=16
 #number of samples for the experiment
-m=100000
+m=10000
 
 results=[["Technique","Iterations mean","Iterations Standard Deviance","Iterations Percentile 50","Iterations Percentile 90","Iterations Percentile 99","Errors mean","Errors Standard Deviance","Errors Percentile 50","Errors Percentile 90","Errors Percentile 99"]]
 for i in range(len(technique)):
@@ -119,4 +119,4 @@ for i in range(len(technique)):
     print("Technique "+str(technique[i])+" just finished :)")
 
 #Exporting results to a .xlsx file
-results_to_excel(results,"results_16_eq.xlsx")
+results_to_excel(results,"results_16_eq_sv.xlsx")
