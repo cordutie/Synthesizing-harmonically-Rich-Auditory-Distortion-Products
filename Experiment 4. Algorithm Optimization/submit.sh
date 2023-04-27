@@ -11,6 +11,6 @@
 # Solicitud de cpus
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=1
 
 python experiment_4_main.py
