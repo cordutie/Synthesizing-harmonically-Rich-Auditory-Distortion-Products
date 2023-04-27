@@ -43,14 +43,13 @@ def Experiment(technique,T,tolerance):
                 T=initial_T+epsilon*np.random.rand(m)
             elif technique[2]==1:
                 T=T+epsilon*np.random.rand(m)
-
     # Once we leave the loop we already have a solution
     solution=temp_sol[1]
     error=np.dot(F(solution,initial_T),F(solution,initial_T))
     return [solution,iterations,error]
 
 #The list of possible and reasonable techniques is defined
-technique=[[0,0,0],[0,0,1],[0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]]
+technique=[[0,1,0],[0,1,1],[1,1,0],[1,1,1]]
 
 #Actual experiment
 
@@ -68,6 +67,7 @@ for i in range(len(technique)):
         temp_sol=Experiment(technique[i],T,72)
         results_iterations_i[j]=temp_sol[1]
         results_errors_i[j]=temp_sol[2]
+        print("technique = "+str(technique[i])+" j = "+str(j))
     results_technique_i=[str(technique[i]),np.mean(results_iterations_i),np.std(results_iterations_i),np.percentile(results_iterations_i,50),np.percentile(results_iterations_i,90),np.percentile(results_iterations_i,99),np.mean(results_errors_i),np.std(results_errors_i),np.percentile(results_errors_i,50),np.percentile(results_errors_i,90),np.percentile(results_errors_i,99)]
     results.append(results_technique_i)
     print("Technique "+str(technique[i])+" just finished :)")
